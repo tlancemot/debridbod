@@ -29,7 +29,8 @@ formatter = logging.Formatter('[{asctime}] [{levelname:<8}] {name}: {message}', 
 async def debrid(ctx, link):
     await ctx.send(f'Unlocking link...please wait')
     logger.info('A link has been asked to unlock')
-    result = AllDebrid.unlockLink(link=link)
+    ad = AllDebrid()
+    result = ad.unlockLink(link=link)
     if result['status'] == "success":
         formatted_result=discord.Embed(title="✅ Link Ready !", url=result['message'], description="Your link has been unlocked")
     else :
@@ -67,5 +68,6 @@ async def on_message(message):
                             await message.channel.send(f"[{file_link['filename']}]: {AllDebrid().unlockLink(file_link['link'])['message']}")
             else:
                 await message.channel.send(result)
+    await bot.process_commands(message)
 
 bot.run(TOKEN)
