@@ -32,6 +32,7 @@ async def debrid(ctx, link):
     ad = AllDebrid()
     result = ad.unlockLink(link=link)
     if result['status'] == "success":
+        logger.info(result['message'])
         formatted_result=discord.Embed(title="✅ Link Ready !", url=result['message'], description="Your link has been unlocked")
     else :
         formatted_result=discord.Embed(title="❗ Error !", description=result['message'])
