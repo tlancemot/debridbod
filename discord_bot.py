@@ -65,7 +65,7 @@ async def on_message(message):
                     magnet_info = AllDebrid().magnet_info(torrent_file['id'])
                     if(magnet_info['status'] == 'success'):
                         for file_link in magnet_info['data']['magnets']['links']:
-                            print(file_link)
+                            logger.info(file_link)
                             await message.channel.send(f"[{file_link['filename']}]: {AllDebrid().unlockLink(file_link['link'])['message']}")
             else:
                 await message.channel.send(result)
